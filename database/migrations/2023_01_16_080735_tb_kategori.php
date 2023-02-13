@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        //
+        //digunakan utk menghapus colom sebelumnya dengan php artisan migrate:rollback
     }
 };

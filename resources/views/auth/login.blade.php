@@ -1,11 +1,12 @@
 @extends('layouts.app')
 
+@section('halaman','login')
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-5">
+        <div class="col-md-6">
             <div class="card">
-                <div class="card-header">{{ __('Silahkan Login') }}</div>
+                <div class="card-header" style="background-color: #4bbcf4">Silahkan Log In</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">

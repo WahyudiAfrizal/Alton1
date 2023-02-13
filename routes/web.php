@@ -25,6 +25,7 @@ Auth::routes([
 ]);
 
 Route::get('/home', [HomeController::class, 'kategori']);
+Route::get('/show', [HomeController::class, 'show']);
 
 Route::get('/modal', function () {return view('layouts.modal');});
 

@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class Kategori extends Model
 {
     protected $table = "kategori";
-    protected $fillable = ["kategori"];
+    protected $fillable = ["kategori","harga","user_id"];
 }

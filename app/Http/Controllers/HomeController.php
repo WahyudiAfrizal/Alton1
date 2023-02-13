@@ -4,39 +4,36 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kategori;
-
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
-     */
-    // public function index()
-    // {
-    //     return view('home');
-    // }
-
     public function kategori()
     {
-        $kategori = Kategori::all();
+        $kategori = Kategori::where('user_id', Auth::user()->id)->get();
         return view('kategori', ['kategori' => $kategori]);
+    }
+    
+    public function show(Request $request)
+    {
+        //paginate = memberi batasan input ke tiap2 user 
+        //code ini digunakan untuk pencarian
+        //LIKE berfungsi sesuai apa yang diinputkan
+        $cari=$request->cari;
+        $kategori = Kategori::where('kategori','LIKE','%'.$cari.'%')
+                            ->where('user_id', Auth::user()->id)
+                            ->paginate();
+        return view('layouts.show', ['kategori' => $kategori]);
     }
 
     public function kategori_tambah()
     {
-        return view('kategori_tambah');
+        return view('kategori_tambah'); 
     }
 
     public function kategori_aksi(Request $data)
@@ -47,13 +44,15 @@ class HomeController extends Controller
             'kategori' => 'required|unique:kategori,kategori',
             'harga'=> 'required|integer'
         ]); 
-        // dd($data->all());
+
         $kategori = $data->kategori;
         $addharga = $data->harga;
         Kategori::insert([
             'kategori' => $kategori,
-            'harga' => $addharga
+            'harga' => $addharga,
+            'user_id' => auth()->id()
         ]);
+
         //redirect = dialihkan
         return redirect('home')->with("sukses", "berhasil ditambah");
     }
