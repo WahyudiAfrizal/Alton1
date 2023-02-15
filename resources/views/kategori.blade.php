@@ -59,6 +59,7 @@
                         @endforeach
                         </tbody>
                     </table>
+                    <a href="/cetak" target="_blank" class="float-right btn btn-sm btn-primary">Cetak Laporan Data</a>
                 </div>
             </div>
         </div>

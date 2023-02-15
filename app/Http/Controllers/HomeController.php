@@ -92,4 +92,10 @@ class HomeController extends Controller
         
     }
 
+    public function cetak()
+    {
+        $kategori = Kategori::where('user_id', Auth::user()->id)->get();
+        return view('cetak', ['kategori' => $kategori]);
+    }
+
 }

@@ -36,3 +36,5 @@ Route::prefix('kategori')->group(function () {
     Route::put('/update/{id}', [HomeController::class, 'kategori_update']);
     Route::get('/hapus/{id}', [HomeController::class, 'kategori_hapus']);
 });
+
+Route::get('/cetak', [HomeController::class, 'cetak']);
